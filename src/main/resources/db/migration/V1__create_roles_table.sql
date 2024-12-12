@@ -1,0 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS task_management;
+
+CREATE TABLE IF NOT EXISTS roles
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL CHECK (name IN ('ROLE_ADMIN', 'ROLE_USER'))
+);
