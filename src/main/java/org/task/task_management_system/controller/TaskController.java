@@ -14,7 +14,6 @@ import org.task.task_management_system.dto.request.TaskRequest;
 import org.task.task_management_system.dto.response.TaskResponse;
 import org.task.task_management_system.service.TaskService;
 
-import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,4 +47,52 @@ public class TaskController {
         return ResponseEntity.ok(tasks);
     }
 
+    @Operation(summary = "Get task by ID",
+            description = "Retrieves a specific task by its ID",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Task retrieved successfully")
+            })
+    @PreAuthorize("@taskSecurityService.canChangeOrWatch(#taskId, @jwtService.extractToken())")
+    @GetMapping("/{taskId}")
+    public ResponseEntity<TaskResponse> getTaskById(@PathVariable Long taskId) {
+        TaskResponse task = taskService.getTaskById(taskId);
+        return ResponseEntity.ok(task);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<TaskResponse>> getAllTasks(Pageable pageable,
+                                                          @RequestParam(required = false) String status,
+                                                          @RequestParam(required = false) String priority,
+                                                          @RequestParam(required = false) Long authorId,
+                                                          @RequestParam(required = false) Long assigneeId) {
+        Page<TaskResponse> tasks = taskService.getTasks(pageable, status, priority, authorId, assigneeId);
+        return ResponseEntity.ok(tasks);
+    }
+
+
+    @Operation(summary = "Update task status and priority",
+            description = "Updates the status and priority of a task",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Task updated successfully")
+            })
+    @PreAuthorize("@taskSecurityService.canChangeOrWatch(#taskId, @jwtService.extractToken())")
+    @PatchMapping("/{taskId}")
+    public ResponseEntity<TaskResponse> updateTaskStatusAndPriority(@PathVariable Long taskId,
+                                                                    @RequestParam String status,
+                                                                    @RequestParam String priority) {
+        TaskResponse updatedTask = taskService.updateTaskStatusAndPriority(taskId, status, priority);
+        return ResponseEntity.ok(updatedTask);
+    }
+
+    @Operation(summary = "Delete a task",
+            description = "Deletes a task by its ID",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Task deleted successfully")
+            })
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTask(taskId);
+        return ResponseEntity.noContent().build();
+    }
 }

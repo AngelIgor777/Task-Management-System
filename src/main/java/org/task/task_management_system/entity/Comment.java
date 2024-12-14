@@ -30,7 +30,7 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    private LocalDateTime createdAt=LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Override
     public boolean equals(Object o) {

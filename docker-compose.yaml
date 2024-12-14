@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    container_name: task_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - task_network
+
+  flyway:
+    image: flyway/flyway:9
+    container_name: flyway_migration
+    depends_on:
+      - db
+    environment:
+      FLYWAY_URL: jdbc:postgresql://task_db:5432/${POSTGRES_DB}
+      FLYWAY_USER: ${POSTGRES_USER}
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./src/resources/db/migration:/flyway/sql:ro
+    entrypoint: ["flyway", "migrate"]
+    networks:
+      - task_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task_management_app
+    depends_on:
+      - db
+      - flyway
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://task_db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "8081:8081"
+    networks:
+      - task_network
+
+networks:
+  task_network:
+    driver: bridge
+
+volumes:
+  db_data:

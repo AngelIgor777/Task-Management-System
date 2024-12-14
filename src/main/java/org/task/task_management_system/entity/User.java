@@ -3,8 +3,6 @@ package org.task.task_management_system.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.proxy.HibernateProxy;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
