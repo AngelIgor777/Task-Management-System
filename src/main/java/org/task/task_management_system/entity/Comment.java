@@ -12,6 +12,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Table(name = "comments", schema = "task_management")
 public class Comment {
 
     @Id
@@ -29,7 +30,7 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt=LocalDateTime.now();
 
     @Override
     public boolean equals(Object o) {

@@ -39,3 +39,16 @@ jwt:
 
 actuator:
   key: ${ACTUATOR_KEY}
+
+SUPER-ADMIN:
+  key: ${SUPER_ADMIN_KEY}
+
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    url: /v3/api-docs
+    path: /swagger-ui.html
+    enabled: true
+

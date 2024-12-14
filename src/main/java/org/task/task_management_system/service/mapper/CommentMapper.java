@@ -12,6 +12,7 @@ public class CommentMapper {
     public CommentResponse toResponse(Comment comment) {
         CommentResponse response = new CommentResponse();
         response.setId(comment.getId());
+        response.setTaskId(comment.getTask().getId());
         response.setTaskTitle(comment.getTask().getTitle());
         response.setUserEmail(comment.getUser().getEmail());
         response.setContent(comment.getContent());

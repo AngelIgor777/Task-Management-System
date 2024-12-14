@@ -9,5 +9,6 @@ import lombok.Data;
 @Builder
 public class CommentRequest {
     private Long taskId;
+    private Long userId;
     private String content;
 }

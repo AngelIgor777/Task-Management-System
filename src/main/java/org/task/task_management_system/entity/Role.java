@@ -20,7 +20,8 @@ public class Role {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleName name;
 
     @Override
     public boolean equals(Object o) {
@@ -36,7 +37,7 @@ public class Role {
     }
 
     public enum RoleName {
-        ROLE_USER, ROLE_ADMIN
+        USER, ADMIN
     }
 }
 

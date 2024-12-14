@@ -12,6 +12,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Table(name = "tasks", schema = "task_management")
 public class Task {
 
     @Id
@@ -38,8 +39,9 @@ public class Task {
     @JoinColumn(name = "assignee_id")
     private User assignee;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Override
     public boolean equals(Object o) {

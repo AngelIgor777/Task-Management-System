@@ -1,20 +1,17 @@
 package org.task.task_management_system.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.task.task_management_system.dto.request.AuthRequest;
 import org.task.task_management_system.dto.response.AuthResponse;
+import org.task.task_management_system.entity.Role;
 import org.task.task_management_system.entity.User;
 import org.task.task_management_system.jwt.service.JwtService;
 import org.task.task_management_system.repository.UserRepository;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +31,12 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
+        ArrayList<String> roles = new ArrayList<>();
+        roles.add(Role.RoleName.USER.toString());
         // Генерация JWT токенов
-        String accessToken = jwtService.generateAccessToken(authRequest.getEmail());
+        String accessToken = jwtService.generateAccessToken(authRequest.getEmail(),roles);
         String refreshToken = jwtService.generateRefreshToken(authRequest.getEmail());
 
-        return new AuthResponse(accessToken, refreshToken);
+        return new AuthResponse(accessToken, refreshToken, user.getId().toString());
     }
 }

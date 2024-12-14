@@ -15,12 +15,17 @@ public class KeyUtil {
     @Getter
     private static String refreshSecret = "";
 
+    @Getter
     private static String accessExpiration = "";
 
+    @Getter
     private static String refreshExpiration = "";
 
     @Getter
     private static String actuatorKey = "";
+
+    @Getter
+    private static String superAdminKey = "";
 
     public static void setProperties(Dotenv dotenv) {
         // Прокидываем переменные в System Environment
@@ -43,6 +48,9 @@ public class KeyUtil {
             }
             if (entry.getKey().equals("JWT_REFRESH_EXPIRATION")) {
                 refreshExpiration = value;
+            }
+            if (entry.getKey().equals("SUPER_ADMIN_KEY")) {
+                superAdminKey = value;
             }
         });
     }

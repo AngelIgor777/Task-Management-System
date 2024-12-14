@@ -1,6 +1,7 @@
 package org.task.task_management_system.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.task.task_management_system.dto.request.RegisterRequest;
@@ -11,6 +12,7 @@ import org.task.task_management_system.repository.UserRepository;
 
 import javax.transaction.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackOn = Exception.class)
@@ -25,10 +27,20 @@ public class UserService {
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
-        Role roleBuild = Role.builder().name(roleName.name()).build();
+        Role roleBuild = Role.builder().name(Role.RoleName.USER).build();
         user.getRoles().add(roleBuild);
         roleRepository.save(roleBuild);
 
         return userRepository.save(user);
+    }
+
+    // Новый метод для добавления роли администратора
+    public void addRoleToUser(Long userId, Role.RoleName roleName) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Role role = Role.builder().name(roleName).build();
+        user.getRoles().add(role);
+
+        roleRepository.save(role);
+        userRepository.save(user);
     }
 }
