@@ -13,6 +13,8 @@ import org.task.task_management_system.repository.TaskRepository;
 import org.task.task_management_system.repository.UserRepository;
 import org.task.task_management_system.service.mapper.CommentMapper;
 
+import javax.persistence.EntityNotFoundException;
+
 
 @Service
 @Transactional
@@ -41,16 +43,16 @@ public class CommentService {
     public CommentResponse getCommentById(Long commentId, Long taskId) {
         Comment comment = commentRepository.findById(commentId)
                 .filter(c -> c.getTask().getId().equals(taskId))
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Comment not found"));
         return commentMapper.toResponse(comment);
     }
 
     public CommentResponse updateComment(Long commentId, CommentRequest commentRequest) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Comment not found"));
 
         if (!comment.getTask().getId().equals(commentRequest.getTaskId())) {
-            throw new RuntimeException("Comment does not belong to the provided task");
+            throw new IllegalArgumentException("Comment does not belong to the provided task");
         }
 
         comment.setContent(commentRequest.getContent());
@@ -61,7 +63,7 @@ public class CommentService {
     public void deleteComment(Long commentId, Long taskId) {
         Comment comment = commentRepository.findById(commentId)
                 .filter(c -> c.getTask().getId().equals(taskId))
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Comment not found"));
         commentRepository.delete(comment);
     }
 }

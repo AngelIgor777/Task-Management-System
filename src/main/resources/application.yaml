@@ -37,11 +37,9 @@ jwt:
   access-expiration: ${JWT_ACCESS_EXPIRATION}
   refresh-expiration: ${JWT_REFRESH_EXPIRATION}
 
-actuator:
-  key: ${ACTUATOR_KEY}
 
 SUPER-ADMIN:
-  key: ${SUPER_ADMIN_KEY}
+  key: ${SUPER_ADMIN_KEY} #для добавления роли админа к пользователю.--ожидается в заголовке с ключом 'super-admin-key'
 
 
 springdoc:

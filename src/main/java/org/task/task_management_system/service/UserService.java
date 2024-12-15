@@ -29,6 +29,7 @@ public class UserService {
 
         Role roleBuild = Role.builder().name(Role.RoleName.USER).build();
         user.getRoles().add(roleBuild);
+
         roleRepository.save(roleBuild);
 
         return userRepository.save(user);
