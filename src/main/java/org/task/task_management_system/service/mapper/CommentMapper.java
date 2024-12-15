@@ -1,22 +1,45 @@
 package org.task.task_management_system.service.mapper;
 
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.task.task_management_system.dto.request.CommentRequest;
 import org.task.task_management_system.dto.response.CommentResponse;
 import org.task.task_management_system.entity.Comment;
+import org.task.task_management_system.entity.Task;
+import org.task.task_management_system.entity.User;
+import org.task.task_management_system.repository.TaskRepository;
+import org.task.task_management_system.service.UserService;
+import javax.persistence.EntityNotFoundException;
 
-import java.time.format.DateTimeFormatter;
-
-@Component
+@Service
+@RequiredArgsConstructor
 public class CommentMapper {
+    private final UserService userService;
+    private final TaskRepository taskRepository;
 
     public CommentResponse toResponse(Comment comment) {
-        CommentResponse response = new CommentResponse();
-        response.setId(comment.getId());
-        response.setTaskId(comment.getTask().getId());
-        response.setTaskTitle(comment.getTask().getTitle());
-        response.setUserEmail(comment.getUser().getEmail());
-        response.setContent(comment.getContent());
-        response.setCreatedAt(comment.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-        return response;
+
+        return CommentResponse.builder()
+                .id(comment.getId())
+                .taskId(comment.getTask().getId())
+                .taskTitle(comment.getTask().getTitle())
+                .userEmail(comment.getUser().getEmail())
+                .content(comment.getContent())
+                .createdAt(comment.getCreatedAt().toString())
+                .build();
+    }
+
+    public Comment toEntity(CommentRequest commentRequest) {
+
+        User user = userService.getUserById(commentRequest.getUserId());
+
+
+        Task task = taskRepository.findById(commentRequest.getTaskId())
+                .orElseThrow(() -> new EntityNotFoundException("Task not found"));
+        return Comment.builder()
+                .content(commentRequest.getContent())
+                .user(user)
+                .task(task)
+                .build();
     }
 }

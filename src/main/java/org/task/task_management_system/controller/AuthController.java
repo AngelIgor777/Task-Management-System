@@ -14,6 +14,7 @@ import org.task.task_management_system.dto.response.AuthResponse;
 import org.task.task_management_system.entity.Role;
 import org.task.task_management_system.service.AuthService;
 import org.task.task_management_system.service.UserService;
+import org.task.task_management_system.service.mapper.UserMapper;
 import org.task.task_management_system.util.KeyUtil;
 
 @Tag(name = "Authentication Controller", description = "API for user authentication and registration")
@@ -24,6 +25,7 @@ public class AuthController {
 
     private final UserService userService;
     private final AuthService authService;
+    private final UserMapper userMapper;
 
     @Operation(summary = "Register a new user",
             description = "Registers a new user with the role USER",
@@ -32,9 +34,7 @@ public class AuthController {
             })
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
-
         System.out.println("Received registration request: " + registerRequest);
-
         userService.registerUser(registerRequest, Role.RoleName.USER);
         return ResponseEntity.ok("User registered successfully");
     }

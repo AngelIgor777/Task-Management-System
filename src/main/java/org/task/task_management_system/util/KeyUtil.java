@@ -28,7 +28,6 @@ public class KeyUtil {
     private static String superAdminKey = "";
 
     public static void setProperties(Dotenv dotenv) {
-        // Прокидываем переменные в System Environment
         dotenv.entries().forEach(entry -> {
             String value = entry.getValue();
             System.setProperty(entry.getKey(), value);

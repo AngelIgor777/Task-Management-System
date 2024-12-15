@@ -9,7 +9,7 @@ import org.task.task_management_system.entity.Role;
 import org.task.task_management_system.entity.User;
 import org.task.task_management_system.repository.RoleRepository;
 import org.task.task_management_system.repository.UserRepository;
-
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 @Slf4j
@@ -34,7 +34,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Новый метод для добавления роли администратора
     public void addRoleToUser(Long userId, Role.RoleName roleName) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
         Role role = Role.builder().name(roleName).build();
@@ -42,5 +41,15 @@ public class UserService {
 
         roleRepository.save(role);
         userRepository.save(user);
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 }

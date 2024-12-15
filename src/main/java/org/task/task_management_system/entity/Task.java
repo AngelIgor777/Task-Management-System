@@ -1,16 +1,16 @@
 package org.task.task_management_system.entity;
 
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter
 @ToString
+@Builder
 @RequiredArgsConstructor
 @Table(name = "tasks", schema = "task_management")
 public class Task {
@@ -40,7 +40,10 @@ public class Task {
     private User assignee;
 
     @Column(nullable = false, updatable = false)
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Builder.Default
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Override

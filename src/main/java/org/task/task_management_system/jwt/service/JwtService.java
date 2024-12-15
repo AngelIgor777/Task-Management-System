@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.task.task_management_system.service.CustomUserDetailsService;
 import org.task.task_management_system.util.JwtAlgorithm;
 import org.task.task_management_system.util.KeyUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Date;

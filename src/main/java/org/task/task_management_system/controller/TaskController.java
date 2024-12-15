@@ -1,6 +1,5 @@
 package org.task.task_management_system.controller;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,8 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.task.task_management_system.dto.request.TaskRequest;
 import org.task.task_management_system.dto.response.TaskResponse;
+import org.task.task_management_system.entity.Task;
 import org.task.task_management_system.service.TaskService;
-
+import org.task.task_management_system.service.mapper.TaskMapper;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +22,7 @@ import org.task.task_management_system.service.TaskService;
 public class TaskController {
 
     private final TaskService taskService;
+    private final TaskMapper taskMapper;  // Внедрение TaskMapper
 
     @Operation(summary = "Create a new task",
             description = "Creates a new task in the system",
@@ -55,8 +56,9 @@ public class TaskController {
     @PreAuthorize("@taskSecurityService.canChangeOrWatch(#taskId, @jwtService.extractToken())")
     @GetMapping("/{taskId}")
     public ResponseEntity<TaskResponse> getTaskById(@PathVariable Long taskId) {
-        TaskResponse task = taskService.getTaskById(taskId);
-        return ResponseEntity.ok(task);
+        Task task = taskService.getTaskById(taskId);
+        TaskResponse taskResponse = taskMapper.toResponse(task);  // Маппинг
+        return ResponseEntity.ok(taskResponse);
     }
 
     @GetMapping
@@ -68,7 +70,6 @@ public class TaskController {
         Page<TaskResponse> tasks = taskService.getTasks(pageable, status, priority, authorId, assigneeId);
         return ResponseEntity.ok(tasks);
     }
-
 
     @Operation(summary = "Update task status and priority",
             description = "Updates the status and priority of a task",

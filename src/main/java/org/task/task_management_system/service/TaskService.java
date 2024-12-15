@@ -1,6 +1,6 @@
 package org.task.task_management_system.service;
 
-import org.springframework.data.crossstore.ChangeSetPersister;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,40 +11,28 @@ import org.task.task_management_system.entity.Task;
 import org.task.task_management_system.entity.User;
 import org.task.task_management_system.exception.TaskNotFoundException;
 import org.task.task_management_system.repository.TaskRepository;
-import org.task.task_management_system.repository.UserRepository;
 import org.task.task_management_system.service.mapper.TaskMapper;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final TaskMapper taskMapper;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, TaskMapper taskMapper) {
-        this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
-        this.taskMapper = taskMapper;
-    }
 
     public TaskResponse createTask(TaskRequest taskRequest) {
-        Task task = new Task();
-        task.setTitle(taskRequest.getTitle());
-        task.setDescription(taskRequest.getDescription());
-        task.setStatus(taskRequest.getStatus());
-        task.setPriority(taskRequest.getPriority());
+        User author = userService.getUserById(taskRequest.getAuthorId());
+        User assignee = userService.getUserById(taskRequest.getAssigneeId());
 
-
-        task.setAssignee(userRepository.findById(taskRequest.getAssigneeId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
-
-        task.setAuthor(userRepository.findById(taskRequest.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
+        Task task = taskMapper.toEntity(taskRequest);
+        task.setAuthor(author);
+        task.setAssignee(assignee);
 
         taskRepository.save(task);
         return taskMapper.toResponse(task);
@@ -62,7 +50,7 @@ public class TaskService {
     }
 
     public TaskResponse updateTaskStatusAndPriority(Long taskId, String status, String priority) {
-        Task task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException("Task not found"));
+        Task task = getTaskById(taskId);
 
         task.setStatus(status);
         task.setPriority(priority);
@@ -73,39 +61,31 @@ public class TaskService {
     }
 
     public Page<TaskResponse> getTasksByAssigneeName(String assigneeEmail, Pageable pageable) {
-        Optional<User> assignee = userRepository.findByEmail(assigneeEmail);
+        User assignee = userService.getUserByEmail(assigneeEmail);
 
-        if (assignee.isEmpty()) {
-            throw new RuntimeException("Assignee not found");
-        }
-
-        Page<Task> tasks = taskRepository.findByAssignee(assignee.get(), pageable);
+        Page<Task> tasks = taskRepository.findByAssignee(assignee, pageable);
 
         return tasks.map(taskMapper::toResponse);
     }
 
-    public TaskResponse getTaskById(Long taskId) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskNotFoundException("Task not found"));
-        return taskMapper.toResponse(task);
-    }
-
     public TaskResponse updateTask(Long taskId, TaskRequest taskRequest) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskNotFoundException("Task not found"));
-        task.setTitle(taskRequest.getTitle());
-        task.setDescription(taskRequest.getDescription());
-        task.setStatus(taskRequest.getStatus());
-        task.setPriority(taskRequest.getPriority());
-        task.setAssignee(userRepository.findById(taskRequest.getAssigneeId())
-                .orElseThrow(() -> new RuntimeException("User not found")));
+        Task task = getTaskById(taskId);
+
+        taskMapper.updateEntityFromRequest(taskRequest, task);
+
+        task.setAssignee(userService.getUserById(taskRequest.getAssigneeId()));
+
         taskRepository.save(task);
         return taskMapper.toResponse(task);
     }
 
     public void deleteTask(Long taskId) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskNotFoundException("Task not found"));
+        Task task = getTaskById(taskId);
         taskRepository.delete(task);
+    }
+
+    public Task getTaskById(Long taskId) {
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new TaskNotFoundException("Task not found"));
     }
 }

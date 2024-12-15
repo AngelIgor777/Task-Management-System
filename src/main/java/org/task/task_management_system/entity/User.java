@@ -1,18 +1,17 @@
 package org.task.task_management_system.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @ToString(exclude = "roles")
-// Генерация equals и hashCode на основе поля email
 @Table(name = "users", schema = "task_management")
 public class User {
 

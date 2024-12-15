@@ -8,9 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.task.task_management_system.entity.Task;
 import org.task.task_management_system.entity.User;
 
-import java.util.List;
-import java.util.Optional;
-
 public interface TaskRepository extends JpaRepository<Task, Long> {
     Page<Task> findByAssignee(User assignee, Pageable pageable);
 

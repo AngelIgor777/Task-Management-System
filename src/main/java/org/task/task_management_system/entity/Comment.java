@@ -1,8 +1,6 @@
 package org.task.task_management_system.entity;
 
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -13,6 +11,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Table(name = "comments", schema = "task_management")
+@Builder
+@AllArgsConstructor
 public class Comment {
 
     @Id
@@ -30,6 +30,7 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Override
