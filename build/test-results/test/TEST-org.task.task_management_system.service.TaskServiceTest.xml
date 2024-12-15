@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.task.task_management_system.service.TaskServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-12-15T10:02:40" hostname="fedora" time="0.465">
+  <properties/>
+  <testcase name="shouldDeleteTaskSuccessfully()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.2"/>
+  <testcase name="shouldGetTaskByIdSuccessfully()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.026"/>
+  <testcase name="shouldReturnAllTasks()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.041"/>
+  <testcase name="shouldCreateTaskSuccessfully()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.036"/>
+  <testcase name="shouldGetTasksByAssigneeEmailSuccessfully()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.096"/>
+  <testcase name="shouldThrowTaskNotFoundExceptionForInvalidTaskId()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.027"/>
+  <testcase name="shouldUpdateTaskStatusAndPriority()" classname="org.task.task_management_system.service.TaskServiceTest" time="0.022"/>
+  <system-out><![CDATA[13:02:36.996 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+13:02:37.011 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+13:02:37.068 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [org.task.task_management_system.service.TaskServiceTest] from class [org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper]
+13:02:37.085 [Test worker] INFO org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.task.task_management_system.service.TaskServiceTest], using SpringBootContextLoader
+13:02:37.091 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [org.task.task_management_system.service.TaskServiceTest]: class path resource [org/task/task_management_system/service/TaskServiceTest-context.xml] does not exist
+13:02:37.092 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [org.task.task_management_system.service.TaskServiceTest]: class path resource [org/task/task_management_system/service/TaskServiceTestContext.groovy] does not exist
+13:02:37.092 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [org.task.task_management_system.service.TaskServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+13:02:37.093 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.task.task_management_system.service.TaskServiceTest]: TaskServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:02:37.239 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/atmosfera/IdeaProjects/Task_Management_System/build/classes/java/main/org/task/task_management_system/TaskManagementSystemApplication.class]
+13:02:37.240 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.task.task_management_system.TaskManagementSystemApplication for test class org.task.task_management_system.service.TaskServiceTest
+13:02:37.244 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - @TestExecutionListeners is not present for class [org.task.task_management_system.service.TaskServiceTest]: using defaults.
+13:02:37.244 [Test worker] INFO org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+13:02:37.261 [Test worker] INFO org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@64dafeed, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@388ba540, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@47605f2f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2ece4966, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1dd0e7c4, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7894f09b, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3d484181, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6111ba37, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@7be58f16, org.springframework.test.context.event.EventPublishingTestExecutionListener@242aa8d9, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@5b11a194, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@37bd68c3, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@60f7cc1d, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@11eadcba, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@4721d212, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1b065145, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@45cff11c]
+13:02:37.265 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.18)
+
+2024-12-15 13:02:37.655  INFO 15144 --- [    Test worker] o.t.t.service.TaskServiceTest            : Starting TaskServiceTest using Java 17.0.13 on fedora with PID 15144 (started by atmosfera in /home/atmosfera/IdeaProjects/Task_Management_System)
+2024-12-15 13:02:37.656  INFO 15144 --- [    Test worker] o.t.t.service.TaskServiceTest            : The following 1 profile is active: "test"
+2024-12-15 13:02:38.168  INFO 15144 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-15 13:02:38.260  INFO 15144 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 4 JPA repository interfaces.
+2024-12-15 13:02:38.340  INFO 15144 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-12-15 13:02:39.003  INFO 15144 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:0314116f-ad8b-46be-911d-ccc4e9f3d511;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-12-15 13:02:39.346  INFO 15144 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-15 13:02:39.389  INFO 15144 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-12-15 13:02:39.420  INFO 15144 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-12-15 13:02:39.505  INFO 15144 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: 
+    
+    drop table if exists task_management.comments CASCADE 
+Hibernate: 
+    
+    drop table if exists task_management.roles CASCADE 
+Hibernate: 
+    
+    drop table if exists task_management.tasks CASCADE 
+Hibernate: 
+    
+    drop table if exists task_management.users CASCADE 
+Hibernate: 
+    
+    drop table if exists task_management.users_roles CASCADE 
+Hibernate: 
+    
+    create table task_management.comments (
+       id bigint generated by default as identity,
+        content varchar(255) not null,
+        created_at timestamp,
+        task_id bigint not null,
+        user_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table task_management.roles (
+       id bigint generated by default as identity,
+        name varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table task_management.tasks (
+       id bigint generated by default as identity,
+        created_at timestamp not null,
+        description varchar(255) not null,
+        priority varchar(255) not null,
+        status varchar(255) not null,
+        title varchar(255) not null,
+        updated_at timestamp,
+        assignee_id bigint,
+        author_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table task_management.users (
+       id bigint generated by default as identity,
+        email varchar(255) not null,
+        password varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table task_management.users_roles (
+       user_id bigint not null,
+        role_id bigint not null,
+        primary key (user_id, role_id)
+    )
+Hibernate: 
+    
+    alter table task_management.users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+Hibernate: 
+    
+    alter table task_management.comments 
+       add constraint FKi7pp0331nbiwd2844kg78kfwb 
+       foreign key (task_id) 
+       references task_management.tasks
+Hibernate: 
+    
+    alter table task_management.comments 
+       add constraint FK8omq0tc18jd43bu5tjh6jvraq 
+       foreign key (user_id) 
+       references task_management.users
+Hibernate: 
+    
+    alter table task_management.tasks 
+       add constraint FKekr1dgiqktpyoip3qmp6lxsit 
+       foreign key (assignee_id) 
+       references task_management.users
+Hibernate: 
+    
+    alter table task_management.tasks 
+       add constraint FKhods8r8oyyx7tuj3c91ki2sk1 
+       foreign key (author_id) 
+       references task_management.users
+Hibernate: 
+    
+    alter table task_management.users_roles 
+       add constraint FKj6m8fwv7oqv74fcehir1a9ffy 
+       foreign key (role_id) 
+       references task_management.roles
+Hibernate: 
+    
+    alter table task_management.users_roles 
+       add constraint FK2o0jvgh89lemvvo17cbqvdxaa 
+       foreign key (user_id) 
+       references task_management.users
+2024-12-15 13:02:39.957  INFO 15144 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-12-15 13:02:39.963  INFO 15144 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-15 13:02:40.626  INFO 15144 --- [    Test worker] o.t.t.service.TaskServiceTest            : Started TaskServiceTest in 3.318 seconds (JVM running for 4.49)
+2024-12-15 13:02:40.649  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@468646ea, testMethod = shouldDeleteTaskSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+2024-12-15 13:02:40.833  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@468646ea, testMethod = shouldDeleteTaskSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:40.843  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@20a46227, testMethod = shouldGetTaskByIdSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+2024-12-15 13:02:40.865  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@20a46227, testMethod = shouldGetTaskByIdSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:40.871  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@6ddbbfbb, testMethod = shouldReturnAllTasks@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+2024-12-15 13:02:40.909  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@6ddbbfbb, testMethod = shouldReturnAllTasks@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:40.917  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@2af31aba, testMethod = shouldCreateTaskSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+2024-12-15 13:02:40.949  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@2af31aba, testMethod = shouldCreateTaskSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:40.957  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@23f539df, testMethod = shouldGetTasksByAssigneeEmailSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_ 
+    where
+        user0_.email=?
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_ 
+    where
+        task0_.assignee_id=? limit ?
+2024-12-15 13:02:41.047  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@23f539df, testMethod = shouldGetTasksByAssigneeEmailSuccessfully@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:41.055  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@7a85454b, testMethod = shouldThrowTaskNotFoundExceptionForInvalidTaskId@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    select
+        task0_.id as id1_2_0_,
+        task0_.assignee_id as assignee8_2_0_,
+        task0_.author_id as author_i9_2_0_,
+        task0_.created_at as created_2_2_0_,
+        task0_.description as descript3_2_0_,
+        task0_.priority as priority4_2_0_,
+        task0_.status as status5_2_0_,
+        task0_.title as title6_2_0_,
+        task0_.updated_at as updated_7_2_0_,
+        user1_.id as id1_3_1_,
+        user1_.email as email2_3_1_,
+        user1_.password as password3_3_1_,
+        user2_.id as id1_3_2_,
+        user2_.email as email2_3_2_,
+        user2_.password as password3_3_2_ 
+    from
+        task_management.tasks task0_ 
+    left outer join
+        task_management.users user1_ 
+            on task0_.assignee_id=user1_.id 
+    inner join
+        task_management.users user2_ 
+            on task0_.author_id=user2_.id 
+    where
+        task0_.id=?
+2024-12-15 13:02:41.077  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@7a85454b, testMethod = shouldThrowTaskNotFoundExceptionForInvalidTaskId@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2024-12-15 13:02:41.083  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@514b247b, testMethod = shouldUpdateTaskStatusAndPriority@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c6a3f47]; rollback [true]
+Hibernate: 
+    select
+        task0_.id as id1_2_,
+        task0_.assignee_id as assignee8_2_,
+        task0_.author_id as author_i9_2_,
+        task0_.created_at as created_2_2_,
+        task0_.description as descript3_2_,
+        task0_.priority as priority4_2_,
+        task0_.status as status5_2_,
+        task0_.title as title6_2_,
+        task0_.updated_at as updated_7_2_ 
+    from
+        task_management.tasks task0_
+Hibernate: 
+    select
+        user0_.id as id1_3_,
+        user0_.email as email2_3_,
+        user0_.password as password3_3_ 
+    from
+        task_management.users user0_
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        task_management.tasks
+        (id, assignee_id, author_id, created_at, description, priority, status, title, updated_at) 
+    values
+        (default, ?, ?, ?, ?, ?, ?, ?, ?)
+2024-12-15 13:02:41.101  INFO 15144 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@f0e995e testClass = TaskServiceTest, testInstance = org.task.task_management_system.service.TaskServiceTest@514b247b, testMethod = shouldUpdateTaskStatusAndPriority@TaskServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@4c37b5b testClass = TaskServiceTest, locations = '{}', classes = '{class org.task.task_management_system.TaskManagementSystemApplication}', contextInitializerClasses = '[]', activeProfiles = '{test}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@604c5de8, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@2a640157, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@bd4d20ac, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@17a1e4ca, [ImportsContextCustomizer@73db4768 key = [org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration, org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.task.task_management_system.service.TaskService, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.task.task_management_system.service.mapper.TaskMapper, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.task.task_management_system.service.UserService]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2f48b3d2, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@23bff419, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@3a6b881b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@0], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
