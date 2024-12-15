@@ -39,7 +39,7 @@ Task Management System — это приложение для управлени
 
    ```bash
    git clone https://github.com/AngelIgor777/Task-Management-System.git
-   cd task-management-system
+   cd Task-Management-System
    ```
    
 ### 🐳 Запуск через Docker
